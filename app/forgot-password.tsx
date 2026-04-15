@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const BRAND_GREEN = '#00A86B';
 const SCREEN_BG = '#FFFFFF';
@@ -13,6 +14,9 @@ const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/0765d756-36ff-42ee-b
 const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/dd269d82-5b0b-4c82-b967-d0f8a7c6efa8';
 
 export default function ForgotPasswordScreen() {
+  const [email, setEmail] = useState('');
+  const isValid = email.trim().length > 0;
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -34,15 +38,26 @@ export default function ForgotPasswordScreen() {
 
         <View style={styles.fieldBlock}>
           <Text style={styles.fieldLabel}>Your Registered Email</Text>
-          <View style={styles.field}>
-            <Image source={{ uri: EMAIL_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
-            <Text style={styles.fieldValue}>CofCap@yourdomain.com</Text>
-          </View>
+            <View style={styles.field}>
+              <Image source={{ uri: EMAIL_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
+              <TextInput
+                style={styles.fieldValue}
+                placeholder="CofCap@yourdomain.com"
+                placeholderTextColor="#9E9E9E"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+              />
+            </View>
         </View>
       </View>
 
       <View style={styles.footer}>
-        <Pressable style={styles.sendButton} onPress={() => router.push('/enter-otp')}>
+        <Pressable 
+          style={[styles.sendButton, !isValid && { backgroundColor: '#008656' }]} 
+          onPress={() => { if (isValid) router.push('/enter-otp'); }}
+        >
           <Text style={styles.sendButtonText}>Send OTP Code</Text>
         </Pressable>
       </View>

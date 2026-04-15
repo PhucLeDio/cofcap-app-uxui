@@ -52,6 +52,7 @@ export default function TabLayout() {
         name="camera"
         options={{
           title: '',
+          tabBarStyle: { display: 'none' },
           tabBarIcon: () => (
             <View style={{
               width: 56,

@@ -12,12 +12,23 @@ const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 
 const UnsplashPlants = [
-  { id: '1', title: 'Succulents & Cacti', image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&q=80' },
-  { id: '2', title: 'Flowering Plants', image: 'https://images.unsplash.com/photo-1490750967868-88cb44cb2754?w=400&q=80' },
-  { id: '3', title: 'Foliage Plants', image: 'https://images.unsplash.com/photo-1542838384-3c6607bbdcab?w=400&q=80' },
-  { id: '4', title: 'Trees', image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&q=80' },
-  { id: '5', title: 'Weeds & Shrubs', image: 'https://images.unsplash.com/photo-1596700078737-0130f40d6945?w=400&q=80' },
-  { id: '6', title: 'Fruits', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80' },
+  { id: 'succulents', title: 'Succulents & Cacti', image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=400&q=80' },
+  { id: 'flowering', title: 'Flowering Plants', image: 'https://images.unsplash.com/photo-1490750967868-88cb44cb2754?w=400&q=80' },
+  { id: 'foliage', title: 'Foliage Plants', image: 'https://images.unsplash.com/photo-1542838384-3c6607bbdcab?w=400&q=80' },
+  { id: 'trees', title: 'Trees', image: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400&q=80' },
+  { id: 'weeds', title: 'Weeds & Shrubs', image: 'https://images.unsplash.com/photo-1596700078737-0130f40d6945?w=400&q=80' },
+  { id: 'fruits', title: 'Fruits', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400&q=80' },
+  { id: 'vegetables', title: 'Vegetables', image: 'https://images.unsplash.com/photo-1566385101042-1a0da0c125c9?w=400&q=80' },
+  { id: 'herbs', title: 'Herbs', image: 'https://images.unsplash.com/photo-1508747703725-719777637510?w=400&q=80' },
+  { id: 'mushrooms', title: 'Mushrooms', image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80' },
+  { id: 'toxic', title: 'Toxic Plants', image: 'https://images.unsplash.com/photo-1512428559083-a401a304443a?w=400&q=80' },
+];
+
+const mockArticles = [
+  { id: '1', title: 'Unlock the Secrets of Succulents: Care Tips for Thriving Beauties', image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=800&q=80' },
+  { id: '2', title: 'The Ultimate Guide to Indoor Plants: From A to Z', image: 'https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80' },
+  { id: '3', title: 'Creating a Tranquil Oasis: How to Design Your Zen Garden', image: 'https://images.unsplash.com/photo-1598902506466-9ab62e1c9448?w=800&q=80' },
+  { id: '4', title: 'Top 10 Air-Purifying Plants for a Healthier Home', image: 'https://images.unsplash.com/photo-1495908333425-29a1e0918c5f?w=800&q=80' },
 ];
 
 export default function HomeScreen() {
@@ -41,48 +52,47 @@ export default function HomeScreen() {
               <Ionicons name="notifications-outline" size={24} color={TEXT_PRIMARY} />
             </Pressable>
           </Link>
-          <Pressable style={styles.iconButton}>
-            <Ionicons name="bookmark-outline" size={24} color={TEXT_PRIMARY} />
-          </Pressable>
+          <Link href="/bookmarks" asChild>
+            <Pressable style={styles.iconButton}>
+              <Ionicons name="bookmark-outline" size={24} color={TEXT_PRIMARY} />
+            </Pressable>
+          </Link>
         </View>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* Search Bar */}
-        <View style={styles.searchBar}>
-          <Ionicons name="search-outline" size={20} color="#BDBDBD" />
-          <TextInput 
-            placeholder="Search plants..." 
-            placeholderTextColor="#BDBDBD"
-            style={styles.searchInput}
-          />
-        </View>
+        <Link href="/search" asChild>
+          <Pressable style={styles.searchBar}>
+            <Ionicons name="search-outline" size={20} color="#BDBDBD" />
+            <Text style={{ fontSize: 16, fontWeight: '500', color: '#BDBDBD' }}>Search plants...</Text>
+          </Pressable>
+        </Link>
 
         {/* Popular Articles */}
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Popular Articles</Text>
-            <Pressable style={styles.viewAllBtn}>
-              <Text style={styles.viewAllText}>View All</Text>
-              <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
-            </Pressable>
+            <Link href="/popular-articles" asChild>
+              <Pressable style={styles.viewAllBtn}>
+                <Text style={styles.viewAllText}>View All</Text>
+                <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
+              </Pressable>
+            </Link>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalScroll}>
-             <View style={styles.articleCard}>
-               <Image source={{uri: 'https://images.unsplash.com/photo-1416879598056-0cbb04922ca4?w=800&q=80'}} style={styles.articleImage} contentFit="cover" />
-               <View style={styles.articleContent}>
-                 <Text style={styles.articleTitle} numberOfLines={2}>Unlock the Secrets of Succulents: Care Tips...</Text>
-                 <Ionicons name="bookmark-outline" size={20} color={TEXT_PRIMARY} />
-               </View>
-             </View>
-             <View style={styles.articleCard}>
-               <Image source={{uri: 'https://images.unsplash.com/photo-1463320726281-696a485928c7?w=800&q=80'}} style={styles.articleImage} contentFit="cover" />
-               <View style={styles.articleContent}>
-                 <Text style={styles.articleTitle} numberOfLines={2}>The Ultimate Guide to Indoor Plants...</Text>
-                 <Ionicons name="bookmark-outline" size={20} color={TEXT_PRIMARY} />
-               </View>
-             </View>
+            {mockArticles.map((article) => (
+              <Link key={article.id} href={`/article/${article.id}` as any} asChild>
+                <Pressable style={styles.articleCard}>
+                  <Image source={{uri: article.image}} style={styles.articleImage} contentFit="cover" />
+                  <View style={styles.articleContent}>
+                    <Text style={styles.articleTitle} numberOfLines={2}>{article.title}</Text>
+                    <Ionicons name="bookmark-outline" size={20} color={TEXT_PRIMARY} />
+                  </View>
+                </Pressable>
+              </Link>
+            ))}
           </ScrollView>
         </View>
 
@@ -91,10 +101,12 @@ export default function HomeScreen() {
            <View style={styles.expertBannerContent}>
               <Text style={styles.expertTitle}>Ask Plant Expert</Text>
               <Text style={styles.expertSubtitle}>Our botanists are ready to help with your problems.</Text>
-              <Pressable style={styles.expertBtn}>
-                <Text style={styles.expertBtnText}>Ask the Experts</Text>
-                <Ionicons name="arrow-forward" size={14} color="#FFF" />
-              </Pressable>
+              <Link href="/ask-experts" asChild>
+                <Pressable style={styles.expertBtn}>
+                  <Text style={styles.expertBtnText}>Ask the Experts</Text>
+                  <Ionicons name="arrow-forward" size={14} color="#FFF" />
+                </Pressable>
+              </Link>
            </View>
            <Image 
               source={{ uri: 'https://images.unsplash.com/photo-1591857177580-dc82b9a47a17?w=400&q=80' }} 
@@ -107,22 +119,27 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Explore Plants</Text>
-            <Pressable style={styles.viewAllBtn}>
-              <Text style={styles.viewAllText}>View All</Text>
-              <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
-            </Pressable>
+            <Link href={'/explore' as any} asChild>
+              <Pressable style={styles.viewAllBtn}>
+                <Text style={styles.viewAllText}>View All</Text>
+                <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
+              </Pressable>
+            </Link>
           </View>
           <View style={styles.gridContainer}>
             {UnsplashPlants.map((plant) => (
-               <View key={plant.id} style={styles.gridItem}>
-                 <Text style={styles.gridTitle} numberOfLines={1}>{plant.title}</Text>
-                 <View style={styles.gridImageContainer}>
-                  <Image source={{uri: plant.image}} style={styles.gridImage} contentFit="cover" />
-                 </View>
-               </View>
+                <Link key={plant.id} href={`/explore/${plant.id}?title=${encodeURIComponent(plant.title)}` as any} asChild>
+                  <Pressable style={styles.gridItem}>
+                    <Text style={styles.gridTitle} numberOfLines={1}>{plant.title}</Text>
+                    <View style={styles.gridImageContainer}>
+                      <Image source={{uri: plant.image}} style={styles.gridImage} contentFit="cover" />
+                    </View>
+                  </Pressable>
+                </Link>
             ))}
           </View>
         </View>
+
         
       </ScrollView>
     </View>
@@ -298,25 +315,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 0,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     gap: 12,
-    minHeight: 120,
+    minHeight: 130,
+    overflow: 'hidden',
   },
   gridTitle: {
     fontSize: 16,
     fontWeight: '600',
     color: TEXT_PRIMARY,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   gridImageContainer: {
     width: '100%',
-    height: 80,
-    alignItems: 'center',
+    height: 90,
+    alignSelf: 'flex-end',
     overflow: 'hidden',
+    borderRadius: 8,
   },
   gridImage: {
-    width: 60,
-    height: 80,
-    bottom: -10,
+    width: '100%',
+    height: '100%',
   },
 });

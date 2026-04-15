@@ -1,7 +1,6 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const BRAND_GREEN = '#00A86B';
@@ -9,14 +8,13 @@ const SCREEN_BG = '#FFFFFF';
 const TEXT_PRIMARY = '#212121';
 const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
+const FIELD_PLACEHOLDER = '#9E9E9E';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/0765d756-36ff-42ee-bdaa-99c46d3c04d2';
-const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/dd269d82-5b0b-4c82-b967-d0f8a7c6efa8';
+const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/4f2d8b7d-b9dd-4e83-8098-99169944a29c';
+const LOCK_ICON_URL = 'https://www.figma.com/api/mcp/asset/a0f99c0b-33b9-4e93-8429-138090dbd11b';
+const HIDE_ICON_URL = 'https://www.figma.com/api/mcp/asset/c60c17be-cc01-4baa-b640-1dab40f0e608';
 
-export default function ForgotPasswordScreen() {
-  const [email, setEmail] = useState('');
-  const isValid = email.trim().length > 0;
-
+export default function CreateNewPasswordScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -29,36 +27,46 @@ export default function ForgotPasswordScreen() {
 
       <View style={styles.content}>
         <View style={styles.headerBlock}>
-          <Text style={styles.title}>Forgot Your Password? 🔑</Text>
+          <Text style={styles.title}>Secure Your Account 🔒</Text>
           <Text style={styles.subtitle}>
-            Enter the email address associated with your CofCap account. We&apos;ll send you a
-            one-time verification code to reset your password.
+            Almost there! Create a new password for your CofCap account to keep it secure. Remember to choose a strong and unique password.
           </Text>
         </View>
 
-        <View style={styles.fieldBlock}>
-          <Text style={styles.fieldLabel}>Your Registered Email</Text>
+        <View style={styles.formSection}>
+          <View style={styles.fieldBlock}>
+            <Text style={styles.fieldLabel}>New Password</Text>
             <View style={styles.field}>
-              <Image source={{ uri: EMAIL_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
+              <Image source={{ uri: LOCK_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
               <TextInput
-                style={styles.fieldValue}
-                placeholder="CofCap@yourdomain.com"
-                placeholderTextColor="#9E9E9E"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
+                placeholder="●●●●●●●●●●●●"
+                placeholderTextColor={FIELD_PLACEHOLDER}
+                style={styles.input}
+                secureTextEntry
               />
+              <Image source={{ uri: HIDE_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
             </View>
+          </View>
+
+          <View style={styles.fieldBlock}>
+            <Text style={styles.fieldLabel}>Confirm New Password</Text>
+            <View style={styles.field}>
+              <Image source={{ uri: LOCK_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
+              <TextInput
+                placeholder="●●●●●●●●●●●●"
+                placeholderTextColor={FIELD_PLACEHOLDER}
+                style={styles.input}
+                secureTextEntry
+              />
+              <Image source={{ uri: HIDE_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
+            </View>
+          </View>
         </View>
       </View>
 
       <View style={styles.footer}>
-        <Pressable 
-          style={[styles.sendButton, !isValid && { backgroundColor: '#008656' }]} 
-          onPress={() => { if (isValid) router.push('/enter-otp'); }}
-        >
-          <Text style={styles.sendButtonText}>Send OTP Code</Text>
+        <Pressable style={styles.button} onPress={() => router.push('/log-in')}>
+          <Text style={styles.buttonText}>Save New Password</Text>
         </Pressable>
       </View>
     </View>
@@ -108,6 +116,9 @@ const styles = StyleSheet.create({
     lineHeight: 29,
     letterSpacing: 0.2,
   },
+  formSection: {
+    gap: 24,
+  },
   fieldBlock: {
     gap: 8,
   },
@@ -133,13 +144,14 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
-  fieldValue: {
+  input: {
     flex: 1,
     color: TEXT_PRIMARY,
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '400',
     lineHeight: 29,
     letterSpacing: 0.2,
+    paddingVertical: 0,
   },
   footer: {
     borderTopWidth: 1,
@@ -149,14 +161,14 @@ const styles = StyleSheet.create({
     paddingBottom: 36,
     backgroundColor: '#FFFFFF',
   },
-  sendButton: {
+  button: {
     borderRadius: 1000,
     paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: BRAND_GREEN,
   },
-  sendButtonText: {
+  buttonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '700',

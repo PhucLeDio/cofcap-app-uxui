@@ -14,7 +14,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
+      <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" options={{ headerShown: false, animation: 'none' }} />
         <Stack.Screen name="walkthrough-1" options={{ headerShown: false, animation: 'none' }} />
         <Stack.Screen name="walkthrough-2" options={{ headerShown: false, animation: 'none' }} />
@@ -27,6 +27,12 @@ export default function RootLayout() {
         <Stack.Screen name="forgot-password" options={{ headerShown: false, animation: 'none' }} />
         <Stack.Screen name="enter-otp" options={{ headerShown: false, animation: 'none' }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="bookmarks" options={{ headerShown: false }} />
+        <Stack.Screen name="explore/index" options={{ headerShown: false }} />
+        <Stack.Screen name="explore/[category]" options={{ headerShown: false }} />
+        <Stack.Screen name="plant/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="ask-experts" options={{ headerShown: false }} />
+        <Stack.Screen name="chat/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
       </Stack>
       <StatusBar style="auto" />

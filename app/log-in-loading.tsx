@@ -2,6 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
 
 const BRAND_GREEN = '#00A86B';
 const SCREEN_BG = '#FFFFFF';
@@ -38,6 +39,13 @@ function SocialButton({ label, iconUrl }: SocialButtonProps) {
 }
 
 export default function LogInLoadingScreen() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace('/(tabs)');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />

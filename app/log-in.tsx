@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const BRAND_GREEN = '#00A86B';
@@ -38,6 +39,10 @@ function SocialButton({ label, iconUrl }: SocialButtonProps) {
 }
 
 export default function LogInScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const isValid = email.trim().length > 0 && password.length > 0;
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -66,6 +71,8 @@ export default function LogInScreen() {
                   style={styles.input}
                   keyboardType="email-address"
                   autoCapitalize="none"
+                  value={email}
+                  onChangeText={setEmail}
                 />
               </View>
             </View>
@@ -79,6 +86,8 @@ export default function LogInScreen() {
                   placeholderTextColor={FIELD_PLACEHOLDER}
                   style={styles.input}
                   secureTextEntry
+                  value={password}
+                  onChangeText={setPassword}
                 />
                 <Image source={{ uri: HIDE_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
               </View>
@@ -110,7 +119,10 @@ export default function LogInScreen() {
       </View>
 
       <View style={styles.footer}>
-        <Pressable style={styles.logInButton} onPress={() => router.push('/log-in-loading')}>
+        <Pressable 
+          style={[styles.logInButton, isValid && { backgroundColor: BRAND_GREEN }]} 
+          onPress={() => { if (isValid) router.push('/log-in-loading'); }}
+        >
           <Text style={styles.logInText}>Log in</Text>
         </Pressable>
       </View>

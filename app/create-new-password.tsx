@@ -10,9 +10,9 @@ const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 const FIELD_PLACEHOLDER = '#9E9E9E';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/4f2d8b7d-b9dd-4e83-8098-99169944a29c';
-const LOCK_ICON_URL = 'https://www.figma.com/api/mcp/asset/a0f99c0b-33b9-4e93-8429-138090dbd11b';
-const HIDE_ICON_URL = 'https://www.figma.com/api/mcp/asset/c60c17be-cc01-4baa-b640-1dab40f0e608';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const LOCK_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/lock.png';
+const HIDE_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/invisible.png';
 
 export default function CreateNewPasswordScreen() {
   return (

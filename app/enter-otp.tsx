@@ -11,8 +11,8 @@ const TEXT_SECONDARY = '#616161';
 const TEXT_MUTED = '#9E9E9E';
 const FIELD_BG = '#FAFAFA';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/71f362bb-4d62-4368-a2b7-b33b9392e489';
-const BACKSPACE_ICON_URL = 'https://www.figma.com/api/mcp/asset/9c58375d-daab-491f-adc2-a0d7d1936783';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const BACKSPACE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/clear-symbol.png';
 
 function KeypadButton({ label, onPress }: { label: string; onPress: () => void }) {
   return (

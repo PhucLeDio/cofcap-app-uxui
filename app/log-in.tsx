@@ -13,13 +13,13 @@ const FIELD_PLACEHOLDER = '#9E9E9E';
 const BORDER_COLOR = '#EEEEEE';
 const BUTTON_DISABLED = '#008656';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/4f2d8b7d-b9dd-4e83-8098-99169944a29c';
-const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/d9741045-9eeb-4115-84c1-da178f77cb90';
-const LOCK_ICON_URL = 'https://www.figma.com/api/mcp/asset/a0f99c0b-33b9-4e93-8429-138090dbd11b';
-const HIDE_ICON_URL = 'https://www.figma.com/api/mcp/asset/c60c17be-cc01-4baa-b640-1dab40f0e608';
-const GOOGLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/68d3d408-f0d4-485e-a63d-154e7b84e1a2';
-const APPLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/c809a5ec-37c7-4be6-b627-7755c55e8f2f';
-const FACEBOOK_ICON_URL = 'https://www.figma.com/api/mcp/asset/ce56bd5d-01af-42fc-8aa2-ee1c61cf0b61';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const EMAIL_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/new-post.png';
+const LOCK_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/lock.png';
+const HIDE_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/invisible.png';
+const GOOGLE_ICON_URL = 'https://img.icons8.com/color/48/000000/google-logo.png';
+const APPLE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/mac-os.png';
+const FACEBOOK_ICON_URL = 'https://img.icons8.com/color/48/000000/facebook-new.png';
 
 type SocialButtonProps = {
   label: string;
@@ -121,7 +121,7 @@ export default function LogInScreen() {
       <View style={styles.footer}>
         <Pressable 
           style={[styles.logInButton, isValid && { backgroundColor: BRAND_GREEN }]} 
-          onPress={() => { if (isValid) router.push('/log-in-loading'); }}
+          onPress={() => { if (isValid) router.replace('/log-in-loading'); }}
         >
           <Text style={styles.logInText}>Log in</Text>
         </Pressable>

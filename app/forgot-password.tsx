@@ -10,8 +10,8 @@ const TEXT_PRIMARY = '#212121';
 const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/0765d756-36ff-42ee-bdaa-99c46d3c04d2';
-const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/dd269d82-5b0b-4c82-b967-d0f8a7c6efa8';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const EMAIL_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/new-post.png';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');

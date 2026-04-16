@@ -10,11 +10,11 @@ const SUBTITLE_COLOR = '#616161';
 const BUTTON_LIGHT_BG = '#EBF8F3';
 const BORDER_COLOR = '#EEEEEE';
 
-const LOGO_URL = 'https://www.figma.com/api/mcp/asset/668793f9-05bc-4327-b8ab-58bbe12cf2e6';
-const GOOGLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/340a22a5-8d2a-4949-9f22-cbf1dc47d53d';
-const APPLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/265ef713-93f3-4623-a388-f89353c1fa5d';
-const FACEBOOK_ICON_URL = 'https://www.figma.com/api/mcp/asset/49349e45-68a7-4932-8c79-84479571ae6c';
-const TWITTER_ICON_URL = 'https://www.figma.com/api/mcp/asset/abb59cab-8f98-43c1-b01f-bb0e759230ef';
+const LOGO_URL = 'https://img.icons8.com/fluency/96/000000/leaf.png';
+const GOOGLE_ICON_URL = 'https://img.icons8.com/color/48/000000/google-logo.png';
+const APPLE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/mac-os.png';
+const FACEBOOK_ICON_URL = 'https://img.icons8.com/color/48/000000/facebook-new.png';
+const TWITTER_ICON_URL = 'https://img.icons8.com/color/48/000000/twitter--v1.png';
 
 type SocialButtonProps = {
   label: string;

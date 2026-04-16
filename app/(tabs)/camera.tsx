@@ -2,11 +2,14 @@ import { StyleSheet, Text, View, TouchableOpacity, Platform, Animated, Easing } 
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { CameraView, useCameraPermissions } from 'expo-camera';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 const BRAND_GREEN = '#00A86B';
+
+// Track scan count for alternating results (simulated database logic)
+let scanCount = 0;
 
 export default function CameraScreen() {
   const insets = useSafeAreaInsets();
@@ -18,46 +21,64 @@ export default function CameraScreen() {
   // Animation value for the scanning line
   const scanAnim = useRef(new Animated.Value(0)).current;
 
-  useEffect(() => {
-    if (permission && permission.granted) {
-      startScanningAnimation();
-      startSimulatedDiagnosis();
-    }
-  }, [permission]);
+  useFocusEffect(
+    useCallback(() => {
+      // Reset state each time we focus the screen
+      setProgress(0);
+      setDiagnosing(false);
+      scanAnim.setValue(0);
+      
+      let interval: ReturnType<typeof setInterval>;
 
-  const startScanningAnimation = () => {
-    scanAnim.setValue(0);
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(scanAnim, {
-          toValue: 1,
-          duration: 2000,
-          easing: Easing.inOut(Easing.quad),
-          useNativeDriver: true,
-        }),
-        Animated.timing(scanAnim, {
-          toValue: 0,
-          duration: 2000,
-          easing: Easing.inOut(Easing.quad),
-          useNativeDriver: true,
-        }),
-      ])
-    ).start();
-  };
+      if (permission && permission.granted) {
+        // Start Scanning Animation
+        Animated.loop(
+          Animated.sequence([
+            Animated.timing(scanAnim, {
+              toValue: 1,
+              duration: 2000,
+              easing: Easing.inOut(Easing.quad),
+              useNativeDriver: true,
+            }),
+            Animated.timing(scanAnim, {
+              toValue: 0,
+              duration: 2000,
+              easing: Easing.inOut(Easing.quad),
+              useNativeDriver: true,
+            }),
+          ])
+        ).start();
 
-  const startSimulatedDiagnosis = () => {
-    setDiagnosing(true);
-    let current = 0;
-    const interval = setInterval(() => {
-       current += 1;
-       if (current >= 100) {
-          clearInterval(interval);
-          setProgress(100);
-       } else {
-          setProgress(current);
-       }
-    }, 100);
-  };
+        // Start simulated diagnosis
+        setDiagnosing(true);
+        let current = 0;
+        interval = setInterval(() => {
+           current += 2; // Increase by 2% each time
+           if (current >= 100) {
+              clearInterval(interval);
+              setProgress(100);
+              
+              // Determine target screen by alternating
+              const target = scanCount % 2 === 0 ? '/diagnosis/results' : '/diagnosis/healthy';
+              scanCount += 1;
+    
+              // Navigate after a tiny delay. Used PUSH so the tab stack is maintained
+              setTimeout(() => {
+                router.push(target as any);
+              }, 400);
+           } else {
+              setProgress(current);
+           }
+        }, 20);
+      }
+
+      // Cleanup function when screen loses focus
+      return () => {
+        if (interval) clearInterval(interval);
+        scanAnim.stopAnimation();
+      };
+    }, [permission])
+  );
 
   if (!permission) {
     // Camera permissions are still loading
@@ -90,7 +111,8 @@ export default function CameraScreen() {
 
       {/* Header Overlay */}
       <View style={[styles.header, { paddingTop: Platform.OS === 'ios' ? insets.top : 44 }]}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.iconButton}>
+        {/* Explicitly Go Home to avoid back-stack confusion */}
+        <TouchableOpacity onPress={() => router.navigate('/(tabs)')} style={styles.iconButton}>
           <Ionicons name="close" size={28} color="#FFFFFF" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Diagnose</Text>

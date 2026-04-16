@@ -10,8 +10,8 @@ const BODY_COLOR = '#616161';
 const DOT_INACTIVE = '#EEEEEE';
 const BUTTON_LIGHT_BG = '#EBF8F3';
 
-const PHONE_MOCKUP_URL = 'https://www.figma.com/api/mcp/asset/655e878e-d9e3-47fd-ade9-ea3903015d74';
-const ELLIPSE_URL = 'https://www.figma.com/api/mcp/asset/094bf0cf-a8e6-425e-8e89-2f0cf218f3bf';
+const PHONE_MOCKUP_URL = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80';
+const ELLIPSE_URL = 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80';
 
 export default function WalkthroughTwoScreen() {
   return (

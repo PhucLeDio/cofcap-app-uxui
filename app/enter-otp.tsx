@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useState, useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 const BRAND_GREEN = '#00A86B';
@@ -10,18 +11,37 @@ const TEXT_SECONDARY = '#616161';
 const TEXT_MUTED = '#9E9E9E';
 const FIELD_BG = '#FAFAFA';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/71f362bb-4d62-4368-a2b7-b33b9392e489';
-const BACKSPACE_ICON_URL = 'https://www.figma.com/api/mcp/asset/9c58375d-daab-491f-adc2-a0d7d1936783';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const BACKSPACE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/clear-symbol.png';
 
-function KeypadButton({ label }: { label: string }) {
+function KeypadButton({ label, onPress }: { label: string; onPress: () => void }) {
   return (
-    <View style={styles.keypadButton}>
+    <Pressable style={styles.keypadButton} onPress={onPress}>
       <Text style={styles.keypadButtonText}>{label}</Text>
-    </View>
+    </Pressable>
   );
 }
 
 export default function EnterOtpScreen() {
+  const [otp, setOtp] = useState('');
+
+  useEffect(() => {
+    if (otp.length === 4) {
+      const timer = setTimeout(() => {
+        router.push('/create-new-password');
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [otp]);
+
+  const handlePress = (val: string) => {
+    if (val === 'backspace') {
+      setOtp((prev) => prev.slice(0, -1));
+    } else {
+      setOtp((prev) => (prev.length < 4 ? prev + val : prev));
+    }
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -42,16 +62,27 @@ export default function EnterOtpScreen() {
         </View>
 
         <View style={styles.pinRow}>
-          <View style={styles.pinFilled}>
-            <Text style={styles.pinFilledText}>7</Text>
-          </View>
-          <View style={styles.pinFilled}>
-            <Text style={styles.pinFilledText}>4</Text>
-          </View>
-          <View style={styles.pinActive}>
-            <Text style={styles.pinActiveText}>5</Text>
-          </View>
-          <View style={styles.pinEmpty} />
+          {[0, 1, 2, 3].map((index) => {
+            const digit = otp[index];
+            const isActive = otp.length === index;
+            const isFilled = digit !== undefined;
+
+            if (isActive) {
+              return (
+                <View key={index} style={styles.pinActive}>
+                  <Text style={styles.pinActiveText}>{digit || ''}</Text>
+                </View>
+              );
+            }
+            if (isFilled) {
+              return (
+                <View key={index} style={styles.pinFilled}>
+                  <Text style={styles.pinFilledText}>{digit}</Text>
+                </View>
+              );
+            }
+            return <View key={index} style={styles.pinEmpty} />;
+          })}
         </View>
 
         <View style={styles.resendBlock}>
@@ -64,26 +95,26 @@ export default function EnterOtpScreen() {
 
       <View style={styles.keyboard}>
         <View style={styles.keyboardRow}>
-          <KeypadButton label="1" />
-          <KeypadButton label="2" />
-          <KeypadButton label="3" />
+          <KeypadButton label="1" onPress={() => handlePress('1')} />
+          <KeypadButton label="2" onPress={() => handlePress('2')} />
+          <KeypadButton label="3" onPress={() => handlePress('3')} />
         </View>
         <View style={styles.keyboardRow}>
-          <KeypadButton label="4" />
-          <KeypadButton label="5" />
-          <KeypadButton label="6" />
+          <KeypadButton label="4" onPress={() => handlePress('4')} />
+          <KeypadButton label="5" onPress={() => handlePress('5')} />
+          <KeypadButton label="6" onPress={() => handlePress('6')} />
         </View>
         <View style={styles.keyboardRow}>
-          <KeypadButton label="7" />
-          <KeypadButton label="8" />
-          <KeypadButton label="9" />
+          <KeypadButton label="7" onPress={() => handlePress('7')} />
+          <KeypadButton label="8" onPress={() => handlePress('8')} />
+          <KeypadButton label="9" onPress={() => handlePress('9')} />
         </View>
         <View style={styles.keyboardRow}>
-          <KeypadButton label="*" />
-          <KeypadButton label="0" />
-          <View style={styles.keypadButton}>
+          <KeypadButton label="*" onPress={() => {}} />
+          <KeypadButton label="0" onPress={() => handlePress('0')} />
+          <Pressable style={styles.keypadButton} onPress={() => handlePress('backspace')}>
             <Image source={{ uri: BACKSPACE_ICON_URL }} style={styles.backspaceIcon} contentFit="contain" />
-          </View>
+          </Pressable>
         </View>
         <View style={styles.homeIndicator} />
       </View>

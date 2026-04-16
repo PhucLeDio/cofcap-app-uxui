@@ -2,6 +2,7 @@ import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
 
 const BRAND_GREEN = '#00A86B';
 const SCREEN_BG = '#FFFFFF';
@@ -10,14 +11,14 @@ const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 const BORDER_COLOR = '#EEEEEE';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/f9a785ba-da3e-498b-bb39-f7228a28019d';
-const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/a4ca37c7-f4ed-42cf-a23f-1a6bb5dbf7ec';
-const LOCK_ICON_URL = 'https://www.figma.com/api/mcp/asset/9c4f5040-b68c-4405-9683-4c55b6c9f020';
-const HIDE_ICON_URL = 'https://www.figma.com/api/mcp/asset/dbfe1ad4-7538-46a5-a292-831e997d2ff7';
-const GOOGLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/8454d7df-ead9-4858-aa1b-e07898654bbb';
-const APPLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/3f77dbc3-a264-4362-8709-f8d6801396ca';
-const FACEBOOK_ICON_URL = 'https://www.figma.com/api/mcp/asset/3ee0ff8a-56e9-43d9-874b-57d7ad8813c7';
-const LOADER_URL = 'https://www.figma.com/api/mcp/asset/04a41848-4ffe-4066-9974-936214d52930';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const EMAIL_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/new-post.png';
+const LOCK_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/lock.png';
+const HIDE_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/invisible.png';
+const GOOGLE_ICON_URL = 'https://img.icons8.com/color/48/000000/google-logo.png';
+const APPLE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/mac-os.png';
+const FACEBOOK_ICON_URL = 'https://img.icons8.com/color/48/000000/facebook-new.png';
+const LOADER_URL = 'https://img.icons8.com/ios/50/ffffff/spinner-frame-5.png';
 
 type SocialButtonProps = {
   label: string;
@@ -37,6 +38,13 @@ function SocialButton({ label, iconUrl }: SocialButtonProps) {
 }
 
 export default function SignUpLoadingScreen() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.replace('/(tabs)');
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />

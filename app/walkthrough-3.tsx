@@ -9,8 +9,8 @@ const TITLE_COLOR = '#212121';
 const BODY_COLOR = '#616161';
 const DOT_INACTIVE = '#EEEEEE';
 
-const PHONE_MOCKUP_URL = 'https://www.figma.com/api/mcp/asset/03907316-f925-4ca3-aa2d-fa7bb61df948';
-const ELLIPSE_URL = 'https://www.figma.com/api/mcp/asset/ea2db437-7a05-4d12-b9bf-b6581caa8b25';
+const PHONE_MOCKUP_URL = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80';
+const ELLIPSE_URL = 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=800&q=80';
 
 export default function WalkthroughThreeScreen() {
   return (

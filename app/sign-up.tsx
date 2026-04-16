@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 const BRAND_GREEN = '#00A86B';
@@ -12,13 +13,13 @@ const FIELD_PLACEHOLDER = '#9E9E9E';
 const BORDER_COLOR = '#EEEEEE';
 const DISABLED_BUTTON = '#008656';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/d58d2155-734e-40db-ada4-1d1117a41a95';
-const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/0f11850a-0169-4378-8ff5-44289b725a69';
-const LOCK_ICON_URL = 'https://www.figma.com/api/mcp/asset/ed6da2f1-01a7-46fa-af67-938c5059181d';
-const HIDE_ICON_URL = 'https://www.figma.com/api/mcp/asset/7e093584-b13a-488a-b3d5-46ffa9e2d713';
-const GOOGLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/9afd7c5f-c5d2-45ec-bbf8-850f55e4ee45';
-const APPLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/10659c9d-e0c0-4638-a128-e010c0078165';
-const FACEBOOK_ICON_URL = 'https://www.figma.com/api/mcp/asset/bd5e928e-0f36-45df-ad29-a97e3610c152';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const EMAIL_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/new-post.png';
+const LOCK_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/lock.png';
+const HIDE_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/invisible.png';
+const GOOGLE_ICON_URL = 'https://img.icons8.com/color/48/000000/google-logo.png';
+const APPLE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/mac-os.png';
+const FACEBOOK_ICON_URL = 'https://img.icons8.com/color/48/000000/facebook-new.png';
 
 type SocialButtonProps = {
   label: string;
@@ -38,6 +39,10 @@ function SocialButton({ label, iconUrl }: SocialButtonProps) {
 }
 
 export default function SignUpScreen() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const isValid = email.trim().length > 0 && password.length > 0;
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -65,6 +70,8 @@ export default function SignUpScreen() {
                 style={styles.input}
                 keyboardType="email-address"
                 autoCapitalize="none"
+                value={email}
+                onChangeText={setEmail}
               />
             </View>
           </View>
@@ -78,6 +85,8 @@ export default function SignUpScreen() {
                 placeholderTextColor={FIELD_PLACEHOLDER}
                 style={styles.input}
                 secureTextEntry
+                value={password}
+                onChangeText={setPassword}
               />
               <Image source={{ uri: HIDE_ICON_URL }} style={styles.fieldIcon} contentFit="contain" />
             </View>
@@ -103,7 +112,10 @@ export default function SignUpScreen() {
       </View>
 
       <View style={styles.footer}>
-        <Pressable style={styles.signUpButton} onPress={() => router.push('/sign-up-loading')}>
+        <Pressable 
+          style={[styles.signUpButton, isValid && { backgroundColor: BRAND_GREEN }]} 
+          onPress={() => { if (isValid) router.push('/sign-up-loading'); }}
+        >
           <Text style={styles.signUpText}>Sign up</Text>
         </Pressable>
       </View>

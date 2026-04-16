@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Platform, Pressable } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useRouter, Link } from 'expo-router';
 import { Image } from 'expo-image';
+import { Link, useRouter } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COMMON_DISEASES, DISEASE_CATEGORIES } from '../../data/diseases';
 
 const BRAND_GREEN = '#00A86B';
@@ -20,7 +20,7 @@ export default function DiagnoseScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      
+
       {/* Header */}
       <View style={[styles.header, { paddingTop: Platform.OS === 'ios' ? insets.top : 44 }]}>
         <View style={styles.headerLeft}>
@@ -33,22 +33,22 @@ export default function DiagnoseScreen() {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
+
         {/* Hero Card */}
         <View style={styles.heroCard}>
           <View style={styles.heroImageContainer}>
-             <Image 
-                source="https://images.unsplash.com/photo-1597055931211-1339d2c5bcc1?w=400&q=80" 
-                style={styles.heroImage} 
-                contentFit="contain"
-             />
+            <Image
+              source="https://images.unsplash.com/photo-1597055931211-1339d2c5bcc1?w=400&q=80"
+              style={styles.heroImage}
+              contentFit="contain"
+            />
           </View>
           <View style={styles.heroContent}>
             <Text style={styles.heroTitle}>Check Your Plant</Text>
             <Text style={styles.heroSubtitle}>Take photos, start diagnose diseases, & get plant care tips.</Text>
-            <TouchableOpacity 
-              style={styles.diagnoseBtn} 
-              activeOpacity={0.8} 
+            <TouchableOpacity
+              style={styles.diagnoseBtn}
+              activeOpacity={0.8}
               onPress={() => router.push('/camera' as any)}
             >
               <Text style={styles.diagnoseBtnText}>Diagnose</Text>
@@ -60,14 +60,22 @@ export default function DiagnoseScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Common Diseases</Text>
-            <TouchableOpacity style={styles.viewAllBtn}>
+            <TouchableOpacity
+              style={styles.viewAllBtn}
+              onPress={() => router.navigate('/diagnosis/common')}
+            >
               <Text style={styles.viewAllText}>View All</Text>
               <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
             </TouchableOpacity>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalScroll}>
             {COMMON_DISEASES.map((item) => (
-              <TouchableOpacity key={item.id} style={styles.diseaseCard} activeOpacity={0.7}>
+              <TouchableOpacity
+                key={item.id}
+                style={styles.diseaseCard}
+                activeOpacity={0.7}
+                onPress={() => router.push(`/diagnosis/${item.id}` as any)}
+              >
                 <Image source={{ uri: item.image }} style={styles.diseaseImage} contentFit="cover" />
                 <Text style={styles.diseaseName}>{item.name}</Text>
               </TouchableOpacity>
@@ -78,9 +86,9 @@ export default function DiagnoseScreen() {
         {/* Ask Expert Banner */}
         <View style={styles.expertBanner}>
           <View style={styles.expertIllustration}>
-             <View style={styles.expertCircle}>
-                <Text style={styles.expertQMark}>?</Text>
-             </View>
+            <View style={styles.expertCircle}>
+              <Text style={styles.expertQMark}>?</Text>
+            </View>
           </View>
           <View style={styles.expertContent}>
             <Text style={styles.expertTitle}>Ask Plant Expert</Text>
@@ -249,18 +257,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   expertCircle: {
-      width: 60,
-      height: 60,
-      borderRadius: 30,
-      borderWidth: 6,
-      borderColor: BRAND_GREEN,
-      alignItems: 'center',
-      justifyContent: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 6,
+    borderColor: BRAND_GREEN,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   expertQMark: {
-      fontSize: 32,
-      fontWeight: '700',
-      color: BRAND_GREEN,
+    fontSize: 32,
+    fontWeight: '700',
+    color: BRAND_GREEN,
   },
   expertContent: {
     flex: 1,

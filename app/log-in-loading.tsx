@@ -11,15 +11,15 @@ const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 const BORDER_COLOR = '#EEEEEE';
 
-const ARROW_LEFT_URL = 'https://www.figma.com/api/mcp/asset/4f2d8b7d-b9dd-4e83-8098-99169944a29c';
-const EMAIL_ICON_URL = 'https://www.figma.com/api/mcp/asset/849afdec-fed1-4a6d-8526-fe5bcb475dd6';
-const LOCK_ICON_URL = 'https://www.figma.com/api/mcp/asset/c779f17d-5d3a-4125-bd03-c92bb35f0cf9';
-const HIDE_ICON_URL = 'https://www.figma.com/api/mcp/asset/b3abf109-4559-4de3-9683-225edc720c31';
-const CHECKED_BOX_URL = 'https://www.figma.com/api/mcp/asset/baeb42ed-4e7e-4756-8d97-bc9b8c179f0a';
-const GOOGLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/3760c792-c172-4d42-83f3-80ff071512c9';
-const APPLE_ICON_URL = 'https://www.figma.com/api/mcp/asset/2092573a-7e30-40e3-b66f-74f6c8dd067c';
-const FACEBOOK_ICON_URL = 'https://www.figma.com/api/mcp/asset/7c6f4b79-4699-4666-af3f-b1df4b646e9d';
-const LOADER_URL = 'https://www.figma.com/api/mcp/asset/6f968790-ba09-4ad2-8c61-e81a10146e6c';
+const ARROW_LEFT_URL = 'https://img.icons8.com/ios-filled/50/000000/left.png';
+const EMAIL_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/new-post.png';
+const LOCK_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/lock.png';
+const HIDE_ICON_URL = 'https://img.icons8.com/ios-filled/50/757575/invisible.png';
+const CHECKED_BOX_URL = 'https://img.icons8.com/ios-filled/50/00A86B/checked-checkbox.png';
+const GOOGLE_ICON_URL = 'https://img.icons8.com/color/48/000000/google-logo.png';
+const APPLE_ICON_URL = 'https://img.icons8.com/ios-filled/50/000000/mac-os.png';
+const FACEBOOK_ICON_URL = 'https://img.icons8.com/color/48/000000/facebook-new.png';
+const LOADER_URL = 'https://img.icons8.com/ios/50/ffffff/spinner-frame-5.png';
 
 type SocialButtonProps = {
   label: string;

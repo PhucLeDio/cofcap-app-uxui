@@ -5,8 +5,8 @@ import { useEffect, useRef } from 'react';
 import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 
 const BRAND_GREEN = '#00A86B';
-const LOGO_URL = 'https://www.figma.com/api/mcp/asset/2af6cc25-39af-49a3-ac21-4afc90b48310';
-const LOADER_URL = 'https://www.figma.com/api/mcp/asset/1e45b925-44ac-435a-b368-367b0b185311';
+const LOGO_URL = 'https://img.icons8.com/fluency/96/000000/leaf.png';
+const LOADER_URL = 'https://img.icons8.com/ios/50/ffffff/spinner-frame-5.png';
 const SPLASH_DURATION_MS = 1800;
 
 export default function SplashScreen() {

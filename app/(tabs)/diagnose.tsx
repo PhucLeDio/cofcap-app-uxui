@@ -38,7 +38,7 @@ export default function DiagnoseScreen() {
         <View style={styles.heroCard}>
           <View style={styles.heroImageContainer}>
             <Image
-              source="https://images.unsplash.com/photo-1597055931211-1339d2c5bcc1?w=400&q=80"
+              source="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBsYW50fGVufDB8fDB8fHww"
               style={styles.heroImage}
               contentFit="contain"
             />

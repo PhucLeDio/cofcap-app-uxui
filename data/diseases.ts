@@ -12,33 +12,33 @@ export type DiseaseCategory = {
 };
 
 export const COMMON_DISEASES: DiseaseItem[] = [
-  { 
-    id: 'abiotic', 
-    name: 'Abiotic', 
+  {
+    id: 'abiotic',
+    name: 'Abiotic',
     image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400&q=80',
     description: 'Abiotic diseases are caused by non-living factors, impacting plant health due to adverse environmental condit...'
   },
-  { 
-    id: 'agaricomycetes', 
-    name: 'Agaricomycetes', 
-    image: 'https://images.unsplash.com/photo-1551065980-fc0403300878?w=400&q=80',
+  {
+    id: 'agaricomycetes',
+    name: 'Agaricomycetes',
+    image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=1973&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     description: 'Agaricomycetes are a class of fungi that includes various plant pathogens, notably thos...'
   },
-  { 
-    id: 'alternaria', 
-    name: 'Alternaria', 
-    image: 'https://images.unsplash.com/photo-1558905628-66a98fb49ea6?w=400&q=80',
+  {
+    id: 'alternaria',
+    name: 'Alternaria',
+    image: 'https://images.unsplash.com/photo-1555037015-1498966bcd7c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGxhbnR8ZW58MHx8MHx8fDA%3D',
     description: 'Alternaria is a genus of fungi that includes several plant pathogenic species. These fu...'
   },
-  { 
-    id: 'bacteria', 
-    name: 'Bacteria', 
-    image: 'https://images.unsplash.com/photo-1528629202416-2da983637651?w=400&q=80',
+  {
+    id: 'bacteria',
+    name: 'Bacteria',
+    image: 'https://images.unsplash.com/photo-1599591410423-f308ce7a8f81?w=400&q=80',
     description: 'Bacterial diseases in plants are caused by various species of bacteria. Common symptoms...'
   },
-  { 
-    id: 'pests', 
-    name: 'Garden Pests', 
+  {
+    id: 'pests',
+    name: 'Garden Pests',
     image: 'https://images.unsplash.com/photo-1599591410423-f308ce7a8f81?w=400&q=80',
     description: 'Garden pests encompass a wide range of organisms, including insects, mites, and o...'
   },
@@ -65,16 +65,16 @@ export const DISEASE_DETAILS: Record<string, any> = {
     symptoms: ['Chewing marks on leaves.', 'Wilting caused by sap extraction.', 'Stippling and discoloration.', 'Holes in fruits.'],
     causes: ['Warm and humid conditions.', 'Lack of natural predators.', 'Imported or infested plant material.'],
     pests: [
-      'Aphids: Sap-sucking insects causing wilting.', 
-      'Whiteflies: Transmit diseases, feed on sap.', 
+      'Aphids: Sap-sucking insects causing wilting.',
+      'Whiteflies: Transmit diseases, feed on sap.',
       'Caterpillars: Larvae chewing on leaves.',
       'Spider Mites: Cause stippling and discoloration.',
       'Beetles: Feed on various plant parts.',
       'Rodents: Gnaw on stems and roots.'
     ],
     treatment: [
-      'Cultural Practices: Sanitation, crop rotation, and choosing resistant varieties.', 
-      'Biological Control: Introduce natural predators.', 
+      'Cultural Practices: Sanitation, crop rotation, and choosing resistant varieties.',
+      'Biological Control: Introduce natural predators.',
       'Chemical Control: Use insecticidal soaps or neem oil cautiously.',
       'Physical Barriers: Install row covers and sticky traps.'
     ],

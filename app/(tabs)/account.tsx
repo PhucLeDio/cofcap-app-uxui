@@ -1,32 +1,55 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Platform } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { Ionicons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import {
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const BRAND_GREEN = '#00A86B';
-const SCREEN_BG = '#FFFFFF';
-const TEXT_PRIMARY = '#212121';
-const TEXT_SECONDARY = '#757575';
-const DIVIDER_COLOR = '#F5F5F5';
-const DESTRUCTIVE = '#FF3B30';
+const BRAND_GREEN = "#00A86B";
+const SCREEN_BG = "#FFFFFF";
+const TEXT_PRIMARY = "#212121";
+const TEXT_SECONDARY = "#757575";
+const DIVIDER_COLOR = "#F5F5F5";
+const DESTRUCTIVE = "#FF3B30";
 
 type SettingItem = {
   id: string;
   icon: keyof typeof Ionicons.glyphMap;
   title: string;
+  route?: string;
 };
 
 const SETTINGS_LIST: SettingItem[] = [
-  { id: 'notifications', icon: 'notifications-outline', title: 'Notifications' },
-  { id: 'security', icon: 'shield-checkmark-outline', title: 'Account & Security' },
-  { id: 'billing', icon: 'star-outline', title: 'Billing & Subscriptions' },
-  { id: 'payment', icon: 'card-outline', title: 'Payment Methods' },
-  { id: 'linked', icon: 'swap-vertical-outline', title: 'Linked Accounts' },
-  { id: 'appearance', icon: 'eye-outline', title: 'App Appearance' },
-  { id: 'analytics', icon: 'analytics-outline', title: 'Data & Analytics' },
-  { id: 'help', icon: 'document-text-outline', title: 'Help & Support' },
+  {
+    id: "notifications",
+    icon: "notifications-outline",
+    title: "Notifications",
+    route: "/account-notifications",
+  },
+  {
+    id: "security",
+    icon: "shield-checkmark-outline",
+    title: "Account & Security",
+    route: "/account-security",
+  },
+  {
+    id: "billing",
+    icon: "star-outline",
+    title: "Billing & Subscriptions",
+    route: "/account-billing-subscriptions",
+  },
+  { id: "payment", icon: "card-outline", title: "Payment Methods" },
+  { id: "linked", icon: "swap-vertical-outline", title: "Linked Accounts" },
+  { id: "appearance", icon: "eye-outline", title: "App Appearance" },
+  { id: "analytics", icon: "analytics-outline", title: "Data & Analytics" },
+  { id: "help", icon: "document-text-outline", title: "Help & Support" },
 ];
 
 export default function AccountScreen() {
@@ -36,9 +59,14 @@ export default function AccountScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      
+
       {/* Header */}
-      <View style={[styles.header, { paddingTop: Platform.OS === 'ios' ? insets.top : 44 }]}>
+      <View
+        style={[
+          styles.header,
+          { paddingTop: Platform.OS === "ios" ? insets.top : 44 },
+        ]}
+      >
         <View style={styles.headerIcon}>
           <Ionicons name="leaf" size={28} color={BRAND_GREEN} />
         </View>
@@ -46,14 +74,20 @@ export default function AccountScreen() {
         <View style={styles.headerIcon} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Profile Info */}
-        <TouchableOpacity style={styles.profileRow} activeOpacity={0.7}>
-          <Image 
-            source="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" 
-            style={styles.avatar} 
-            contentFit="cover" 
+        <TouchableOpacity
+          style={styles.profileRow}
+          activeOpacity={0.7}
+          onPress={() => router.push("/account-my-profile")}
+        >
+          <Image
+            source="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80"
+            style={styles.avatar}
+            contentFit="cover"
           />
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Coffee Capture</Text>
@@ -63,16 +97,22 @@ export default function AccountScreen() {
         </TouchableOpacity>
 
         {/* Upgrade Banner */}
-        <TouchableOpacity style={styles.upgradeBanner} activeOpacity={0.9}>
+        <TouchableOpacity
+          style={styles.upgradeBanner}
+          activeOpacity={0.9}
+          onPress={() => router.push("/upgrade-plan")}
+        >
           <View style={styles.bannerIconContainer}>
             <Ionicons name="apps" size={24} color={BRAND_GREEN} />
           </View>
           <View style={styles.bannerTextContainer}>
             <Text style={styles.bannerTitle}>Upgrade Plan to Unlock More!</Text>
-            <Text style={styles.bannerSubtitle}>Enjoy all the benefits and explore more possibilities</Text>
+            <Text style={styles.bannerSubtitle}>
+              Enjoy all the benefits and explore more possibilities
+            </Text>
           </View>
           <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
-          
+
           {/* Decorative Elements */}
           <View style={styles.decorDot1} />
           <View style={styles.decorDot2} />
@@ -82,8 +122,18 @@ export default function AccountScreen() {
         {/* Settings List */}
         <View style={styles.settingsContainer}>
           {SETTINGS_LIST.map((item) => (
-            <TouchableOpacity key={item.id} style={styles.settingItem} activeOpacity={0.7}>
-              <Ionicons name={item.icon} size={24} color={TEXT_PRIMARY} style={styles.settingIcon} />
+            <TouchableOpacity
+              key={item.id}
+              style={styles.settingItem}
+              activeOpacity={0.7}
+              onPress={() => item.route && router.push(item.route)}
+            >
+              <Ionicons
+                name={item.icon}
+                size={24}
+                color={TEXT_PRIMARY}
+                style={styles.settingIcon}
+              />
               <Text style={styles.settingTitle}>{item.title}</Text>
               <Ionicons name="chevron-forward" size={20} color="#BDBDBD" />
             </TouchableOpacity>
@@ -91,15 +141,19 @@ export default function AccountScreen() {
         </View>
 
         {/* Logout Button */}
-        <TouchableOpacity 
-          style={[styles.settingItem, styles.logoutItem]} 
+        <TouchableOpacity
+          style={[styles.settingItem, styles.logoutItem]}
           activeOpacity={0.7}
-          onPress={() => router.replace('/log-in')}
+          onPress={() => router.replace("/log-in")}
         >
-          <Ionicons name="log-out-outline" size={24} color={DESTRUCTIVE} style={styles.settingIcon} />
+          <Ionicons
+            name="log-out-outline"
+            size={24}
+            color={DESTRUCTIVE}
+            style={styles.settingIcon}
+          />
           <Text style={[styles.settingTitle, styles.logoutText]}>Logout</Text>
         </TouchableOpacity>
-
       </ScrollView>
     </View>
   );
@@ -111,9 +165,9 @@ const styles = StyleSheet.create({
     backgroundColor: SCREEN_BG,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 12,
     backgroundColor: SCREEN_BG,
@@ -121,19 +175,19 @@ const styles = StyleSheet.create({
   headerIcon: {
     width: 44,
     height: 44,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   headerTitle: {
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   scrollContent: {
     paddingBottom: 40,
   },
   profileRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 20,
     gap: 16,
@@ -142,7 +196,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
   },
   profileInfo: {
     flex: 1,
@@ -150,7 +204,7 @@ const styles = StyleSheet.create({
   },
   profileName: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   profileEmail: {
@@ -163,18 +217,18 @@ const styles = StyleSheet.create({
     backgroundColor: BRAND_GREEN,
     borderRadius: 16,
     padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
-    overflow: 'hidden', // Contain decorative dots
+    overflow: "hidden", // Contain decorative dots
   },
   bannerIconContainer: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 2,
   },
   bannerTextContainer: {
@@ -184,40 +238,40 @@ const styles = StyleSheet.create({
   },
   bannerTitle: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#FFFFFF',
+    fontWeight: "700",
+    color: "#FFFFFF",
   },
   bannerSubtitle: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: "rgba(255, 255, 255, 0.9)",
     lineHeight: 16,
   },
   decorDot1: {
-    position: 'absolute',
+    position: "absolute",
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     top: 16,
     left: 12,
     opacity: 0.8,
   },
   decorDot2: {
-    position: 'absolute',
+    position: "absolute",
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     bottom: 20,
     left: 40,
     opacity: 0.6,
   },
   decorDot3: {
-    position: 'absolute',
+    position: "absolute",
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     top: 40,
     right: 60,
     opacity: 0.4,
@@ -227,8 +281,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   settingItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 18,
   },
   settingIcon: {
@@ -237,7 +291,7 @@ const styles = StyleSheet.create({
   settingTitle: {
     flex: 1,
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     color: TEXT_PRIMARY,
   },
   logoutItem: {

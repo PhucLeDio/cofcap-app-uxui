@@ -1,4 +1,45 @@
-# Welcome to your Expo app 👋
+# CofCap - Plant Care & Diagnosis App 🌱
+
+A comprehensive plant care application built with Expo and React Native. CofCap helps users identify plants, diagnose diseases, and manage their personal plant collection.
+
+## Features
+
+- 🔍 **Plant Identification**: Browse and search through extensive plant database
+- 🏥 **Disease Diagnosis**: Identify and treat plant diseases with expert guidance
+- 📸 **Camera Integration**: Take photos to diagnose plant health issues
+- 🌿 **My Plants**: Track and manage your personal plant collection
+- 📝 **Care Journal**: Log watering, fertilizing, and other care activities
+- 💬 **Ask Experts**: Connect with botanists for personalized advice
+- 📚 **Educational Articles**: Learn about plant care through curated content
+
+## Tech Stack
+
+- **Framework**: Expo SDK ~54.0
+- **Language**: TypeScript
+- **Navigation**: Expo Router (file-based routing)
+- **UI**: React Native with custom components
+- **Icons**: Ionicons from @expo/vector-icons
+- **Images**: expo-image for optimized image loading
+
+## Project Structure
+
+```
+app/
+├── (tabs)/          # Main tab navigation screens
+├── article/         # Article detail screens
+├── chat/            # Expert chat screens
+├── diagnosis/       # Disease diagnosis flow
+├── explore/         # Plant exploration screens
+├── my-plants/       # User plant collection
+└── plant/           # Plant detail screens
+
+components/          # Reusable UI components
+constants/           # Theme and configuration
+data/               # Mock data (plants, diseases, user plants)
+hooks/              # Custom React hooks
+```
+
+## Get started
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -24,6 +65,22 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+
+## Available Scripts
+
+- `npm start` - Start the Expo development server
+- `npm run android` - Run on Android emulator
+- `npm run ios` - Run on iOS simulator
+- `npm run web` - Run in web browser
+- `npm run lint` - Run ESLint for code quality
+
+## Key Dependencies
+
+- `expo-router` - File-based navigation
+- `expo-camera` - Camera functionality for plant diagnosis
+- `expo-image` - Optimized image component
+- `react-native-reanimated` - Smooth animations
+- `react-native-safe-area-context` - Safe area handling
 
 ## Get a fresh project
 

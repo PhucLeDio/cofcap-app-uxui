@@ -1,44 +1,96 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Platform } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { Ionicons } from '@expo/vector-icons';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+    Modal,
+    Pressable,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-const BRAND_GREEN = '#00A86B';
-const SCREEN_BG = '#FFFFFF';
-const TEXT_PRIMARY = '#212121';
-const TEXT_SECONDARY = '#757575';
-const DIVIDER_COLOR = '#F5F5F5';
-const DESTRUCTIVE = '#FF3B30';
+const BRAND_GREEN = "#00A86B";
+const SCREEN_BG = "#FFFFFF";
+const TEXT_PRIMARY = "#212121";
+const TEXT_SECONDARY = "#757575";
+const DIVIDER_COLOR = "#F5F5F5";
+const DESTRUCTIVE = "#FF3B30";
 
 type SettingItem = {
   id: string;
   icon: keyof typeof Ionicons.glyphMap;
   title: string;
+  route?: string;
 };
 
 const SETTINGS_LIST: SettingItem[] = [
-  { id: 'notifications', icon: 'notifications-outline', title: 'Notifications' },
-  { id: 'security', icon: 'shield-checkmark-outline', title: 'Account & Security' },
-  { id: 'billing', icon: 'star-outline', title: 'Billing & Subscriptions' },
-  { id: 'payment', icon: 'card-outline', title: 'Payment Methods' },
-  { id: 'linked', icon: 'swap-vertical-outline', title: 'Linked Accounts' },
-  { id: 'appearance', icon: 'eye-outline', title: 'App Appearance' },
-  { id: 'analytics', icon: 'analytics-outline', title: 'Data & Analytics' },
-  { id: 'help', icon: 'document-text-outline', title: 'Help & Support' },
+  {
+    id: "notifications",
+    icon: "notifications-outline",
+    title: "Notifications",
+    route: "/account-notifications",
+  },
+  {
+    id: "security",
+    icon: "shield-checkmark-outline",
+    title: "Account & Security",
+    route: "/account-security",
+  },
+  {
+    id: "billing",
+    icon: "star-outline",
+    title: "Billing & Subscriptions",
+    route: "/account-billing-subscriptions",
+  },
+  {
+    id: "payment",
+    icon: "card-outline",
+    title: "Payment Methods",
+    route: "/account-payment-methods",
+  },
+  {
+    id: "linked",
+    icon: "swap-vertical-outline",
+    title: "Linked Accounts",
+    route: "/account-linked-accounts",
+  },
+  {
+    id: "appearance",
+    icon: "eye-outline",
+    title: "App Appearance",
+    route: "/account-appearance",
+  },
+  {
+    id: "analytics",
+    icon: "analytics-outline",
+    title: "Data & Analytics",
+    route: "/account-data-analytics",
+  },
+  { id: "help", icon: "document-text-outline", title: "Help & Support", route: "/account-help" },
 ];
 
 export default function AccountScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
-      
+
       {/* Header */}
-      <View style={[styles.header, { paddingTop: Platform.OS === 'ios' ? insets.top : 44 }]}>
+      <View
+        style={[
+          styles.header,
+          { paddingTop: Platform.OS === "ios" ? insets.top : 44 },
+        ]}
+      >
         <View style={styles.headerIcon}>
           <Ionicons name="leaf" size={28} color={BRAND_GREEN} />
         </View>
@@ -46,14 +98,20 @@ export default function AccountScreen() {
         <View style={styles.headerIcon} />
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Profile Info */}
-        <TouchableOpacity style={styles.profileRow} activeOpacity={0.7}>
-          <Image 
-            source="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" 
-            style={styles.avatar} 
-            contentFit="cover" 
+        <TouchableOpacity
+          style={styles.profileRow}
+          activeOpacity={0.7}
+          onPress={() => router.push("/account-my-profile")}
+        >
+          <Image
+            source="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80"
+            style={styles.avatar}
+            contentFit="cover"
           />
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>Coffee Capture</Text>
@@ -63,16 +121,22 @@ export default function AccountScreen() {
         </TouchableOpacity>
 
         {/* Upgrade Banner */}
-        <TouchableOpacity style={styles.upgradeBanner} activeOpacity={0.9}>
+        <TouchableOpacity
+          style={styles.upgradeBanner}
+          activeOpacity={0.9}
+          onPress={() => router.push("/upgrade-plan")}
+        >
           <View style={styles.bannerIconContainer}>
             <Ionicons name="apps" size={24} color={BRAND_GREEN} />
           </View>
           <View style={styles.bannerTextContainer}>
             <Text style={styles.bannerTitle}>Upgrade Plan to Unlock More!</Text>
-            <Text style={styles.bannerSubtitle}>Enjoy all the benefits and explore more possibilities</Text>
+            <Text style={styles.bannerSubtitle}>
+              Enjoy all the benefits and explore more possibilities
+            </Text>
           </View>
           <Ionicons name="chevron-forward" size={20} color="#FFFFFF" />
-          
+
           {/* Decorative Elements */}
           <View style={styles.decorDot1} />
           <View style={styles.decorDot2} />
@@ -82,8 +146,18 @@ export default function AccountScreen() {
         {/* Settings List */}
         <View style={styles.settingsContainer}>
           {SETTINGS_LIST.map((item) => (
-            <TouchableOpacity key={item.id} style={styles.settingItem} activeOpacity={0.7}>
-              <Ionicons name={item.icon} size={24} color={TEXT_PRIMARY} style={styles.settingIcon} />
+            <TouchableOpacity
+              key={item.id}
+              style={styles.settingItem}
+              activeOpacity={0.7}
+              onPress={() => item.route && router.push(item.route)}
+            >
+              <Ionicons
+                name={item.icon}
+                size={24}
+                color={TEXT_PRIMARY}
+                style={styles.settingIcon}
+              />
               <Text style={styles.settingTitle}>{item.title}</Text>
               <Ionicons name="chevron-forward" size={20} color="#BDBDBD" />
             </TouchableOpacity>
@@ -91,16 +165,65 @@ export default function AccountScreen() {
         </View>
 
         {/* Logout Button */}
-        <TouchableOpacity 
-          style={[styles.settingItem, styles.logoutItem]} 
+        <TouchableOpacity
+          style={[styles.settingItem, styles.logoutItem]}
           activeOpacity={0.7}
-          onPress={() => router.replace('/log-in')}
+          onPress={() => setShowLogoutModal(true)}
         >
-          <Ionicons name="log-out-outline" size={24} color={DESTRUCTIVE} style={styles.settingIcon} />
+          <Ionicons
+            name="log-out-outline"
+            size={24}
+            color={DESTRUCTIVE}
+            style={styles.settingIcon}
+          />
           <Text style={[styles.settingTitle, styles.logoutText]}>Logout</Text>
         </TouchableOpacity>
-
       </ScrollView>
+
+      {/* Logout Modal */}
+      <Modal
+        visible={showLogoutModal}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowLogoutModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <Pressable
+            style={styles.modalBackdrop}
+            onPress={() => setShowLogoutModal(false)}
+          />
+          <View style={[styles.modalContent, { paddingBottom: insets.bottom || 24 }]}>
+            <View style={styles.modalHandle} />
+            <Text style={styles.modalTitle}>Logout</Text>
+            <View style={styles.modalDivider} />
+            <Text style={styles.modalSubtitle}>
+              Are you sure you want to log out?
+            </Text>
+            <View style={styles.modalDivider} />
+
+            <View style={styles.modalActions}>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.modalButtonCancel]}
+                activeOpacity={0.8}
+                onPress={() => setShowLogoutModal(false)}
+              >
+                <Text style={styles.modalButtonTextCancel}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.modalButton, styles.modalButtonConfirm]}
+                activeOpacity={0.8}
+                onPress={() => {
+                  setShowLogoutModal(false);
+                  router.replace("/log-in");
+                }}
+              >
+                <Text style={styles.modalButtonTextConfirm}>Yes, Logout</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -111,9 +234,9 @@ const styles = StyleSheet.create({
     backgroundColor: SCREEN_BG,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 12,
     backgroundColor: SCREEN_BG,
@@ -121,19 +244,19 @@ const styles = StyleSheet.create({
   headerIcon: {
     width: 44,
     height: 44,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   headerTitle: {
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   scrollContent: {
     paddingBottom: 40,
   },
   profileRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 20,
     gap: 16,
@@ -142,7 +265,7 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
   },
   profileInfo: {
     flex: 1,
@@ -150,7 +273,7 @@ const styles = StyleSheet.create({
   },
   profileName: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   profileEmail: {
@@ -163,18 +286,18 @@ const styles = StyleSheet.create({
     backgroundColor: BRAND_GREEN,
     borderRadius: 16,
     padding: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
-    overflow: 'hidden', // Contain decorative dots
+    overflow: "hidden", // Contain decorative dots
   },
   bannerIconContainer: {
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: '#FFFFFF',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 2,
   },
   bannerTextContainer: {
@@ -184,40 +307,40 @@ const styles = StyleSheet.create({
   },
   bannerTitle: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#FFFFFF',
+    fontWeight: "700",
+    color: "#FFFFFF",
   },
   bannerSubtitle: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.9)',
+    color: "rgba(255, 255, 255, 0.9)",
     lineHeight: 16,
   },
   decorDot1: {
-    position: 'absolute',
+    position: "absolute",
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     top: 16,
     left: 12,
     opacity: 0.8,
   },
   decorDot2: {
-    position: 'absolute',
+    position: "absolute",
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     bottom: 20,
     left: 40,
     opacity: 0.6,
   },
   decorDot3: {
-    position: 'absolute',
+    position: "absolute",
     width: 4,
     height: 4,
     borderRadius: 2,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     top: 40,
     right: 60,
     opacity: 0.4,
@@ -227,8 +350,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   settingItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 18,
   },
   settingIcon: {
@@ -237,7 +360,7 @@ const styles = StyleSheet.create({
   settingTitle: {
     flex: 1,
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     color: TEXT_PRIMARY,
   },
   logoutItem: {
@@ -246,5 +369,75 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     color: DESTRUCTIVE,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  modalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  modalContent: {
+    backgroundColor: SCREEN_BG,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    alignItems: "center",
+  },
+  modalHandle: {
+    width: 48,
+    height: 4,
+    backgroundColor: "#EEEEEE",
+    borderRadius: 2,
+    marginBottom: 24,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: DESTRUCTIVE,
+    marginBottom: 24,
+  },
+  modalDivider: {
+    width: "100%",
+    height: 1,
+    backgroundColor: DIVIDER_COLOR,
+    marginBottom: 24,
+  },
+  modalSubtitle: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: TEXT_PRIMARY,
+    marginBottom: 24,
+  },
+  modalActions: {
+    flexDirection: "row",
+    gap: 16,
+    width: "100%",
+    paddingBottom: 24,
+  },
+  modalButton: {
+    flex: 1,
+    height: 58,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalButtonCancel: {
+    backgroundColor: "#E6F6F0",
+  },
+  modalButtonTextCancel: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: BRAND_GREEN,
+  },
+  modalButtonConfirm: {
+    backgroundColor: BRAND_GREEN,
+  },
+  modalButtonTextConfirm: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#FFFFFF",
   },
 });

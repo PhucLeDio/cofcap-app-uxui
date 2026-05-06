@@ -27,7 +27,7 @@ export default function DiagnoseScreen() {
           <Ionicons name="leaf" size={24} color={BRAND_GREEN} />
         </View>
         <Text style={styles.headerTitle}>Diagnose</Text>
-        <TouchableOpacity style={styles.headerRight} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.headerRight} activeOpacity={0.7} onPress={() => router.push('/diagnosis/history' as any)}>
           <Ionicons name="time-outline" size={28} color={TEXT_PRIMARY} />
         </TouchableOpacity>
       </View>
@@ -38,7 +38,7 @@ export default function DiagnoseScreen() {
         <View style={styles.heroCard}>
           <View style={styles.heroImageContainer}>
             <Image
-              source="https://images.unsplash.com/photo-1597055931211-1339d2c5bcc1?w=400&q=80"
+              source="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBsYW50fGVufDB8fDB8fHww"
               style={styles.heroImage}
               contentFit="contain"
             />
@@ -105,7 +105,7 @@ export default function DiagnoseScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Explore Diseases</Text>
-            <TouchableOpacity style={styles.viewAllBtn}>
+            <TouchableOpacity style={styles.viewAllBtn} onPress={() => router.push('/diagnosis/explore' as any)}>
               <Text style={styles.viewAllText}>View All</Text>
               <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
             </TouchableOpacity>

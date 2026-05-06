@@ -6,14 +6,14 @@ import { useRouter, Link } from 'expo-router';
 import { Image } from 'expo-image';
 import { useState } from 'react';
 
+import { ALL_PLANTS, PlantItem } from '../data/plants';
+
 const BRAND_GREEN = '#00A86B';
 const SCREEN_BG = '#FFFFFF';
 const TEXT_PRIMARY = '#212121';
 const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 const DIVIDER_COLOR = '#EEEEEE';
-
-import { ALL_PLANTS, PlantItem } from '../data/plants';
 
 const recentSearchesInit = [
   'Night-blooming cereus',

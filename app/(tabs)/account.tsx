@@ -45,10 +45,30 @@ const SETTINGS_LIST: SettingItem[] = [
     title: "Billing & Subscriptions",
     route: "/account-billing-subscriptions",
   },
-  { id: "payment", icon: "card-outline", title: "Payment Methods" },
-  { id: "linked", icon: "swap-vertical-outline", title: "Linked Accounts" },
-  { id: "appearance", icon: "eye-outline", title: "App Appearance" },
-  { id: "analytics", icon: "analytics-outline", title: "Data & Analytics" },
+  {
+    id: "payment",
+    icon: "card-outline",
+    title: "Payment Methods",
+    route: "/account-payment-methods",
+  },
+  {
+    id: "linked",
+    icon: "swap-vertical-outline",
+    title: "Linked Accounts",
+    route: "/account-linked-accounts",
+  },
+  {
+    id: "appearance",
+    icon: "eye-outline",
+    title: "App Appearance",
+    route: "/account-appearance",
+  },
+  {
+    id: "analytics",
+    icon: "analytics-outline",
+    title: "Data & Analytics",
+    route: "/account-data-analytics",
+  },
   { id: "help", icon: "document-text-outline", title: "Help & Support" },
 ];
 

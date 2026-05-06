@@ -71,7 +71,7 @@ export default function CommonDiseasesScreen() {
           {filteredDiseases.length === 0 && (
             <View style={styles.emptyResults}>
               <Ionicons name="search-outline" size={60} color="#EEEEEE" />
-              <Text style={styles.emptyText}>No diseases found for "{searchQuery}"</Text>
+              <Text style={styles.emptyText}>{`No diseases found for "${searchQuery}"`}</Text>
             </View>
           )}
         </View>

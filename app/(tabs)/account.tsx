@@ -69,7 +69,7 @@ const SETTINGS_LIST: SettingItem[] = [
     title: "Data & Analytics",
     route: "/account-data-analytics",
   },
-  { id: "help", icon: "document-text-outline", title: "Help & Support" },
+  { id: "help", icon: "document-text-outline", title: "Help & Support", route: "/account-help" },
 ];
 
 export default function AccountScreen() {

@@ -32,8 +32,8 @@ const COLORS = {
 const MENU_ITEMS = [
   { title: "FAQ", route: "/account-help-faq" },
   { title: "Contact Support", route: "/account-help-contact" },
-  { title: "Privacy Policy", route: null },
-  { title: "Terms of Service", route: null },
+  { title: "Privacy Policy", route: "/account-help-privacy" },
+  { title: "Terms of Service", route: "/account-help-terms" },
   { title: "Partner", route: null },
   { title: "Job Vacancy", route: null },
   { title: "Accessibility", route: null },

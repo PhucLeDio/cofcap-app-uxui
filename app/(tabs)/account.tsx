@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import {
     Platform,
     ScrollView,
@@ -9,6 +10,8 @@ import {
     Text,
     TouchableOpacity,
     View,
+    Modal,
+    Pressable,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -75,6 +78,7 @@ const SETTINGS_LIST: SettingItem[] = [
 export default function AccountScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -164,7 +168,7 @@ export default function AccountScreen() {
         <TouchableOpacity
           style={[styles.settingItem, styles.logoutItem]}
           activeOpacity={0.7}
-          onPress={() => router.replace("/log-in")}
+          onPress={() => setShowLogoutModal(true)}
         >
           <Ionicons
             name="log-out-outline"
@@ -175,6 +179,51 @@ export default function AccountScreen() {
           <Text style={[styles.settingTitle, styles.logoutText]}>Logout</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Logout Modal */}
+      <Modal
+        visible={showLogoutModal}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setShowLogoutModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <Pressable
+            style={styles.modalBackdrop}
+            onPress={() => setShowLogoutModal(false)}
+          />
+          <View style={[styles.modalContent, { paddingBottom: insets.bottom || 24 }]}>
+            <View style={styles.modalHandle} />
+            <Text style={styles.modalTitle}>Logout</Text>
+            <View style={styles.modalDivider} />
+            <Text style={styles.modalSubtitle}>
+              Are you sure you want to log out?
+            </Text>
+            <View style={styles.modalDivider} />
+
+            <View style={styles.modalActions}>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.modalButtonCancel]}
+                activeOpacity={0.8}
+                onPress={() => setShowLogoutModal(false)}
+              >
+                <Text style={styles.modalButtonTextCancel}>Cancel</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.modalButton, styles.modalButtonConfirm]}
+                activeOpacity={0.8}
+                onPress={() => {
+                  setShowLogoutModal(false);
+                  router.replace("/log-in");
+                }}
+              >
+                <Text style={styles.modalButtonTextConfirm}>Yes, Logout</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -320,5 +369,75 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     color: DESTRUCTIVE,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  modalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  modalContent: {
+    backgroundColor: SCREEN_BG,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    alignItems: "center",
+  },
+  modalHandle: {
+    width: 48,
+    height: 4,
+    backgroundColor: "#EEEEEE",
+    borderRadius: 2,
+    marginBottom: 24,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "700",
+    color: DESTRUCTIVE,
+    marginBottom: 24,
+  },
+  modalDivider: {
+    width: "100%",
+    height: 1,
+    backgroundColor: DIVIDER_COLOR,
+    marginBottom: 24,
+  },
+  modalSubtitle: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: TEXT_PRIMARY,
+    marginBottom: 24,
+  },
+  modalActions: {
+    flexDirection: "row",
+    gap: 16,
+    width: "100%",
+    paddingBottom: 24,
+  },
+  modalButton: {
+    flex: 1,
+    height: 58,
+    borderRadius: 100,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalButtonCancel: {
+    backgroundColor: "#E6F6F0",
+  },
+  modalButtonTextCancel: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: BRAND_GREEN,
+  },
+  modalButtonConfirm: {
+    backgroundColor: BRAND_GREEN,
+  },
+  modalButtonTextConfirm: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#FFFFFF",
   },
 });

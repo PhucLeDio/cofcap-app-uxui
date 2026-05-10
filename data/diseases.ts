@@ -1,6 +1,7 @@
 /**
  * Disease Data Types and Collections
  * Contains information about plant diseases, symptoms, and treatments
+ *********
  */
 
 export type DiseaseItem = {

@@ -13,6 +13,7 @@ const TEXT_SECONDARY = '#616161';
 const FIELD_BG = '#FAFAFA';
 const DIVIDER_COLOR = '#EEEEEE';
 
+///// List experts
 const mockExperts = [
   { id: '1', name: 'Dr. Ly Quynh Tran', specialty: 'Orchidaceae Researcher', image: 'https://i.pravatar.cc/150?u=1' },
   { id: '2', name: 'Prof. Benjamin Woods', specialty: 'Ethnobotany Expert', image: 'https://i.pravatar.cc/150?u=2' },

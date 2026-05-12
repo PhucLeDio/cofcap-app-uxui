@@ -1,17 +1,24 @@
-import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'expo-image';
-import { Link, useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import { Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { COMMON_DISEASES, DISEASE_CATEGORIES } from '../../data/diseases';
+import { Ionicons } from "@expo/vector-icons";
+import { Image } from "expo-image";
+import { Link, useRouter } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import {
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { COMMON_DISEASES, DISEASE_CATEGORIES } from "../../data/diseases";
 
-const BRAND_GREEN = '#00A86B';
-const SCREEN_BG = '#FFFFFF';
-const TEXT_PRIMARY = '#212121';
-const TEXT_SECONDARY = '#757575';
-const CARD_BG = '#F5F9F7'; // Soft greenish background for hero
-const FIELD_BG = '#FAFAFA';
+const BRAND_GREEN = "#00A86B";
+const SCREEN_BG = "#FFFFFF";
+const TEXT_PRIMARY = "#212121";
+const TEXT_SECONDARY = "#757575";
+const CARD_BG = "#F5F9F7"; // Soft greenish background for hero
+const FIELD_BG = "#FAFAFA";
 
 export default function DiagnoseScreen() {
   const insets = useSafeAreaInsets();
@@ -22,34 +29,47 @@ export default function DiagnoseScreen() {
       <StatusBar style="dark" />
 
       {/* Header */}
-      <View style={[styles.header, { paddingTop: Platform.OS === 'ios' ? insets.top : 44 }]}>
+      <View
+        style={[
+          styles.header,
+          { paddingTop: Platform.OS === "ios" ? insets.top : 44 },
+        ]}
+      >
         <View style={styles.headerLeft}>
           <Ionicons name="leaf" size={24} color={BRAND_GREEN} />
         </View>
         <Text style={styles.headerTitle}>Diagnose</Text>
-        <TouchableOpacity style={styles.headerRight} activeOpacity={0.7} onPress={() => router.push('/diagnosis/history' as any)}>
+        <TouchableOpacity
+          style={styles.headerRight}
+          activeOpacity={0.7}
+          onPress={() => router.push("/diagnosis/history" as any)}
+        >
           <Ionicons name="time-outline" size={28} color={TEXT_PRIMARY} />
         </TouchableOpacity>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Hero Card */}
         <View style={styles.heroCard}>
           <View style={styles.heroImageContainer}>
             <Image
-              source="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBsYW50fGVufDB8fDB8fHww"
+              source="https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=400&q=80"
               style={styles.heroImage}
               contentFit="contain"
             />
           </View>
           <View style={styles.heroContent}>
             <Text style={styles.heroTitle}>Check Your Plant</Text>
-            <Text style={styles.heroSubtitle}>Take photos, start diagnose diseases, & get plant care tips.</Text>
+            <Text style={styles.heroSubtitle}>
+              Take photos, start diagnose diseases, & get plant care tips.
+            </Text>
             <TouchableOpacity
               style={styles.diagnoseBtn}
               activeOpacity={0.8}
-              onPress={() => router.push('/camera' as any)}
+              onPress={() => router.push("/camera" as any)}
             >
               <Text style={styles.diagnoseBtnText}>Diagnose</Text>
             </TouchableOpacity>
@@ -62,13 +82,17 @@ export default function DiagnoseScreen() {
             <Text style={styles.sectionTitle}>Common Diseases</Text>
             <TouchableOpacity
               style={styles.viewAllBtn}
-              onPress={() => router.navigate('/diagnosis/common')}
+              onPress={() => router.navigate("/diagnosis/common")}
             >
               <Text style={styles.viewAllText}>View All</Text>
               <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
             </TouchableOpacity>
           </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.horizontalScroll}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.horizontalScroll}
+          >
             {COMMON_DISEASES.map((item) => (
               <TouchableOpacity
                 key={item.id}
@@ -76,7 +100,11 @@ export default function DiagnoseScreen() {
                 activeOpacity={0.7}
                 onPress={() => router.push(`/diagnosis/${item.id}` as any)}
               >
-                <Image source={{ uri: item.image }} style={styles.diseaseImage} contentFit="cover" />
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.diseaseImage}
+                  contentFit="cover"
+                />
                 <Text style={styles.diseaseName}>{item.name}</Text>
               </TouchableOpacity>
             ))}
@@ -92,7 +120,9 @@ export default function DiagnoseScreen() {
           </View>
           <View style={styles.expertContent}>
             <Text style={styles.expertTitle}>Ask Plant Expert</Text>
-            <Text style={styles.expertSubtitle}>Our botanists are ready to help with your problems.</Text>
+            <Text style={styles.expertSubtitle}>
+              Our botanists are ready to help with your problems.
+            </Text>
             <Link href="/ask-experts" asChild>
               <TouchableOpacity style={styles.expertBtn} activeOpacity={0.8}>
                 <Text style={styles.expertBtnText}>Ask the Experts</Text>
@@ -105,15 +135,26 @@ export default function DiagnoseScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>Explore Diseases</Text>
-            <TouchableOpacity style={styles.viewAllBtn} onPress={() => router.push('/diagnosis/explore' as any)}>
+            <TouchableOpacity
+              style={styles.viewAllBtn}
+              onPress={() => router.push("/diagnosis/explore" as any)}
+            >
               <Text style={styles.viewAllText}>View All</Text>
               <Ionicons name="arrow-forward" size={16} color={BRAND_GREEN} />
             </TouchableOpacity>
           </View>
           <View style={styles.grid}>
             {DISEASE_CATEGORIES.map((category) => (
-              <TouchableOpacity key={category.id} style={styles.gridItem} activeOpacity={0.8}>
-                <Image source={{ uri: category.image }} style={styles.gridImage} contentFit="cover" />
+              <TouchableOpacity
+                key={category.id}
+                style={styles.gridItem}
+                activeOpacity={0.8}
+              >
+                <Image
+                  source={{ uri: category.image }}
+                  style={styles.gridImage}
+                  contentFit="cover"
+                />
                 <View style={styles.gridOverlay}>
                   <Text style={styles.gridText}>{category.title}</Text>
                 </View>
@@ -132,9 +173,9 @@ const styles = StyleSheet.create({
     backgroundColor: SCREEN_BG,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 24,
     paddingVertical: 12,
     backgroundColor: SCREEN_BG,
@@ -144,7 +185,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 22,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   headerRight: {
@@ -158,8 +199,8 @@ const styles = StyleSheet.create({
     backgroundColor: CARD_BG,
     borderRadius: 24,
     padding: 24,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
   },
   heroImageContainer: {
@@ -175,7 +216,7 @@ const styles = StyleSheet.create({
   },
   heroTitle: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   heroSubtitle: {
@@ -188,37 +229,37 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginTop: 8,
   },
   diagnoseBtnText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   section: {
     marginBottom: 24,
   },
   sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 24,
     marginBottom: 16,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   viewAllBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 4,
   },
   viewAllText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     color: BRAND_GREEN,
   },
   horizontalScroll: {
@@ -238,7 +279,7 @@ const styles = StyleSheet.create({
   },
   diseaseName: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     color: TEXT_PRIMARY,
   },
   expertBanner: {
@@ -246,15 +287,15 @@ const styles = StyleSheet.create({
     backgroundColor: FIELD_BG,
     borderRadius: 24,
     padding: 24,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 16,
   },
   expertIllustration: {
     width: 80,
     height: 80,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   expertCircle: {
     width: 60,
@@ -262,12 +303,12 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 6,
     borderColor: BRAND_GREEN,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   expertQMark: {
     fontSize: 32,
-    fontWeight: '700',
+    fontWeight: "700",
     color: BRAND_GREEN,
   },
   expertContent: {
@@ -276,7 +317,7 @@ const styles = StyleSheet.create({
   },
   expertTitle: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: "700",
     color: TEXT_PRIMARY,
   },
   expertSubtitle: {
@@ -289,41 +330,41 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     paddingVertical: 10,
     paddingHorizontal: 16,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     marginTop: 4,
   },
   expertBtnText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   grid: {
     paddingHorizontal: 24,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     gap: 16,
   },
   gridItem: {
-    width: '47.5%',
+    width: "47.5%",
     height: 100,
     borderRadius: 16,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   gridImage: {
     ...StyleSheet.absoluteFillObject,
   },
   gridOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.35)',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "rgba(0,0,0,0.35)",
+    alignItems: "center",
+    justifyContent: "center",
     padding: 12,
   },
   gridText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: '700',
-    textAlign: 'center',
+    fontWeight: "700",
+    textAlign: "center",
   },
 });
